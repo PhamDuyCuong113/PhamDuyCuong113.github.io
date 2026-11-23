@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pham Duy Cuong’s personal blog about full-stack development, software engineering, and learning DevOps, Data Engineering, and AI.">
+  <meta name="theme-color" content="#222222">
+  <title>Cuong's Blog — Pham Duy Cuong</title>
+  <style>
+    :root { --ink:#171717; --muted:#777; --header:#222; --paper:rgba(250,250,250,.925); --line:#191919; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body { margin:0; color:var(--ink); font-family:Georgia,'Times New Roman',serif; line-height:1.5; min-height:100vh; background:#77816e; }
+    /* Photograph and color fallback: the only externally loaded asset. */
+    body::before { content:""; position:fixed; z-index:-2; inset:0; background:
+      linear-gradient(90deg,rgba(255,247,212,.20),rgba(17,34,21,.18)),
+      url('https://images.unsplash.com/photo-1630817597954-6db080775f4a?auto=format&fit=crop&w=1920&q=85') center center / cover no-repeat,
+      linear-gradient(115deg,#d6d1a5 0%,#c9d6b0 26%,#566844 66%,#192a26 100%);
+      transform:scale(1.025); }
+    a { color:inherit; }
+    a:focus-visible, button:focus-visible { outline:3px solid #3e7a9f; outline-offset:4px; }
+    .topbar { background:var(--header); color:#aba9a7; min-height:63px; position:relative; z-index:10; box-shadow:0 1px 0 rgba(0,0,0,.18); }
+    .nav-shell { max-width:1400px; width:calc(100% - 44px); margin:auto; height:63px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { font-size:27px; text-decoration:none; letter-spacing:-.5px; white-space:nowrap; }
+    .brand:hover,.nav-items a:hover { color:white; }
+    .nav-items { display:flex; align-items:center; gap:32px; }
+    .nav-items a { display:inline-flex; align-items:center; gap:7px; text-decoration:none; font-size:24px; white-space:nowrap; }
+    .nav-items svg { width:23px; height:23px; fill:currentColor; }
+    .paper { width:min(1146px,calc(100% - 34px)); margin:24px auto 0; padding:62px 36px 58px; background:var(--paper); min-height:calc(100vh - 87px); box-shadow:0 2px 30px rgba(0,0,0,.08); }
+    .section { margin-bottom:66px; }
+    .section-heading { font-size:35px; font-weight:400; margin:0 0 20px; line-height:1.35; letter-spacing:-.4px; }
+    .section-heading.strong { font-weight:700; }
+    .heading-note { display:inline-block; vertical-align:middle; margin-left:9px; color:#858585; font-size:.47em; font-style:italic; font-weight:400; letter-spacing:0; white-space:nowrap; }
+    .cards { width:min(942px,100%); display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+    .post { border:2px solid var(--line); border-radius:6px; background:#fff; min-width:0; min-height:410px; padding:10px 10px 21px; display:flex; flex-direction:column; justify-content:space-between; align-items:stretch; cursor:pointer; color:#080808; text-align:center; font:inherit; transition:box-shadow .16s ease, transform .16s ease; }
+    .post:hover { box-shadow:0 7px 22px rgba(0,0,0,.16); transform:translateY(-3px); }
+    .art { display:grid; place-items:center; height:285px; overflow:hidden; background:#fff; }
+    .art svg { width:100%; height:100%; display:block; }
+    .post-caption { min-height:83px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; }
+    .post-title { display:block; font-size:23px; font-weight:bold; line-height:1.2; }
+    .post-subtitle { display:block; font-size:17px; font-style:italic; font-weight:bold; }
+    .muted-subtitle { color:#6c6c6c; }
+    .section-intro { width:min(800px,100%); margin:-2px 0 22px; font-size:19px; color:#303030; }
+    .about-copy { width:min(850px,100%); font-size:19px; line-height:1.85; }
+    .about-copy p { margin:0 0 18px; }
+    .about-copy a, .contact-line a { text-underline-offset:4px; text-decoration-thickness:1px; }
+    .contact-line { font-size:20px; }
+    .contact-links { display:flex; flex-wrap:wrap; gap:15px; margin-top:22px; }
+    .contact-links a { padding:9px 19px; border:1.8px solid #222; border-radius:4px; background:#fff; text-decoration:none; font-size:17px; }
+    .contact-links a:hover { color:#fff; background:#222; }
+    .page-footer { width:min(942px,100%); padding-top:20px; border-top:1px solid #bbb; color:#555; font-size:15px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; }
+    dialog { border:2px solid #222; border-radius:5px; width:min(560px,calc(100% - 28px)); max-height:min(80vh,660px); padding:0; box-shadow:0 20px 80px #0008; color:#171717; font-family:Georgia,'Times New Roman',serif; }
+    dialog::backdrop { background:rgba(0,0,0,.57); }
+    .dialog-head { display:flex; justify-content:space-between; align-items:start; gap:14px; padding:25px 29px 10px; }
+    .dialog-head h2 { margin:0; font-size:29px; }
+    .close { background:none; color:#333; border:0; padding:0 5px; font-size:31px; cursor:pointer; }
+    .dialog-content { padding:0 29px 30px; font-size:19px; line-height:1.7; }
+    .dialog-tag { display:block; font-style:italic; color:#666; font-size:16px; margin-bottom:17px; }
+    .dialog-link { display:inline-block; margin-top:12px; font-size:17px; text-decoration:underline; text-underline-offset:4px; }
+    @media(max-width:1100px) { .paper { padding:50px 30px 54px; } .post { min-height:365px; } .art { height:245px; } .post-title { font-size:21px; } }
+    @media(max-width:760px) { .nav-shell { height:62px; width:calc(100% - 28px); } .brand{font-size:22px;} .nav-items {gap:15px;} .nav-items a{font-size:17px;gap:4px;} .nav-items svg{width:17px;height:17px;} .paper { margin-top:14px; padding:35px 23px 30px; width:calc(100% - 22px); } .section-heading { font-size:29px; } .cards { grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; } .post { min-height:330px; padding:8px 8px 15px; } .art {height:217px;} .post-title { font-size:19px; } .post-subtitle { font-size:15px; } .section {margin-bottom:48px;} }
+    @media(max-width:520px) { .heading-note { display:block; margin:4px 0 0; font-size:.62em; } .nav-items {gap:12px;} .nav-items a {font-size:0;} .nav-items svg{width:22px;height:22px;} .brand {font-size:23px;} .cards { grid-template-columns:1fr; width:min(330px,100%); } .post{ min-height:385px; } .art{height:275px;} .post-title{font-size:22px;} .section-heading{font-size:27px;} .about-copy,.contact-line{font-size:17px;} }
+    @media(prefers-reduced-motion:reduce) { html{scroll-behavior:auto;} .post{transition:none;} }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="nav-shell">
+      <a href="#blog" class="brand">cuong's blog</a>
+      <nav class="nav-items" aria-label="Main navigation">
+        <a href="#blog"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 17.3V21h3.7L17.6 10.1l-3.7-3.7L3 17.3zm17.5-10.5a1 1 0 0 0 0-1.4l-1.9-1.9a1 1 0 0 0-1.4 0l-1.5 1.5 3.7 3.7 1.1-1.9z"/></svg>Blog</a>
+        <a href="#about"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 12a5.2 5.2 0 1 0 0-10.4A5.2 5.2 0 0 0 12 12zm0 2c-5.3 0-9 3.1-9 6.2V22h18v-1.8C21 17.1 17.3 14 12 14z"/></svg>About</a>
+        <a href="#contact"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M2 4h20v16H2zm1.7 2 8.3 6.4L20.3 6H3.7zm16.8 12V8.3L12 14.8 3.5 8.3V18z"/></svg>Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="blog" class="paper">
+    <section class="section" aria-labelledby="engineering-title">
+      <h1 id="engineering-title" class="section-heading">Software Engineering (General)</h1>
+      <div class="cards">
+        <button class="post" data-post="design" type="button">
+          <span class="art" aria-hidden="true">
+            <svg viewBox="0 0 280 285" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="285" fill="#fff"/>
+              <g fill="#f4f3ef" stroke="#96928c" stroke-width="1.8"><rect x="81" y="26" width="118" height="48" rx="4"/><rect x="15" y="123" width="110" height="55" rx="4"/><rect x="157" y="123" width="110" height="55" rx="4"/><rect x="82" y="224" width="118" height="46" rx="4"/></g>
+              <g stroke="#87919c" stroke-width="2.2" fill="none"><path d="M140 74v24H69v25M140 98h71v25M69 178v24h71v22M211 178v24h-71"/></g>
+              <g fill="#454545" font-family="Georgia" text-anchor="middle"><text x="140" y="55" font-size="14">Client</text><text x="70" y="145" font-size="14">API</text><text x="70" y="160" font-size="11">Services</text><text x="212" y="145" font-size="14">Worker</text><text x="212" y="160" font-size="11">Queue</text><text x="140" y="250" font-size="14">Database</text></g>
+            </svg>
+          </span><span class="post-caption"><span class="post-title">System Design</span><span class="post-subtitle muted-subtitle">Architecture &amp; Trade-offs</span></span>
+        </button>
+        <button class="post" data-post="backend" type="button">
+          <span class="art" aria-hidden="true">
+            <svg viewBox="0 0 280 285" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="285" fill="#fff"/><rect x="20" y="27" width="242" height="226" rx="6" fill="#f6f7f7" stroke="#d2d2d2"/><rect x="20" y="27" width="242" height="25" rx="6" fill="#d5dde1"/>
+              <circle cx="38" cy="40" r="4" fill="#cf948c"/><circle cx="52" cy="40" r="4" fill="#e1c38f"/><circle cx="66" cy="40" r="4" fill="#9dbca3"/>
+              <g font-family="monospace" font-size="14"><text x="34" y="83" fill="#5e7791">GET</text><text x="75" y="83" fill="#414141">/api/users</text><text x="34" y="112" fill="#5f907c">POST</text><text x="84" y="112" fill="#414141">/api/chat</text><text x="34" y="148" fill="#929292">{</text><text x="45" y="176" fill="#6c8b9f">"status"</text><text x="125" y="176" fill="#333">: 200,</text><text x="45" y="204" fill="#6c8b9f">"ok"</text><text x="91" y="204" fill="#333">: true</text><text x="34" y="231" fill="#929292">}</text></g>
+            </svg>
+          </span><span class="post-caption"><span class="post-title">Backend &amp; APIs</span><span class="post-subtitle muted-subtitle">Java, Services &amp; Data</span></span>
+        </button>
+        <button class="post" data-post="performance" type="button">
+          <span class="art" aria-hidden="true">
+            <svg viewBox="0 0 280 285" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="285" fill="#fff"/>
+              <rect x="18" y="29" width="244" height="215" fill="#f8f7f4" stroke="#deddda"/><text x="34" y="53" font-family="Georgia" font-size="13" fill="#666">Cache &amp; response time</text>
+              <g stroke="#dfdfdf" stroke-width="1"><path d="M42 78v143M42 221h199M42 180h199M42 139h199M42 98h199"/></g>
+              <g fill="#c6a78b"><rect x="61" y="111" width="22" height="110"/><rect x="103" y="147" width="22" height="74"/><rect x="145" y="182" width="22" height="39"/><rect x="187" y="197" width="22" height="24"/></g>
+              <g font-family="Georgia" font-size="11" fill="#747474" text-anchor="middle"><text x="73" y="235">No cache</text><text x="157" y="235">Cached</text></g>
+              <path d="M63 83h150" stroke="#aab5c0" stroke-width="2" stroke-dasharray="6 4"/>
+            </svg>
+          </span><span class="post-caption"><span class="post-title">Web Performance</span><span class="post-subtitle muted-subtitle">Caching &amp; Optimization</span></span>
+        </button>
+        <button class="post" data-post="database" type="button">
+          <span class="art" aria-hidden="true">
+            <svg viewBox="0 0 280 285" xmlns="http://www.w3.org/2000/svg">
+              <rect width="280" height="285" fill="#fff"/>
+              <text x="20" y="22" font-family="Georgia" font-size="12" fill="#797979">Entity–relationship model</text>
+              <g fill="none" stroke="#9ca8a9" stroke-width="2.2"><path d="M123 92h29"/><path d="M139 92v90h-21"/><path d="M154 88l-7 4 7 4"/><path d="M118 178l-6 4 6 4"/></g>
+              <g font-family="Georgia" font-size="12" fill="#343a3a">
+                <rect x="16" y="40" width="110" height="104" rx="4" fill="#f5f1eb" stroke="#a8a39a" stroke-width="1.5"/>
+                <path d="M16 65h110" stroke="#a8a39a"/><text x="29" y="57" font-weight="bold">users</text><text x="27" y="84">🔑 id</text><text x="27" y="105">name</text><text x="27" y="126">email</text>
+                <rect x="154" y="40" width="111" height="104" rx="4" fill="#eef2f6" stroke="#a6b4bd" stroke-width="1.5"/>
+                <path d="M154 65h111" stroke="#a6b4bd"/><text x="167" y="57" font-weight="bold">orders</text><text x="165" y="84">id</text><text x="165" y="105">user_id</text><text x="165" y="126">total</text>
+                <rect x="80" y="182" width="122" height="84" rx="4" fill="#edf3eb" stroke="#a5b6a0" stroke-width="1.5"/>
+                <path d="M80 207h122" stroke="#a5b6a0"/><text x="93" y="199" font-weight="bold">products</text><text x="93" y="228">id</text><text x="93" y="247">price</text>
+              </g>
+            </svg>
+          </span><span class="post-caption"><span class="post-title">Database Design</span><span class="post-subtitle muted-subtitle">Schemas &amp; Relationships</span></span>
+        </button>
+        <button class="post" data-post="sqlindex" type="button">
+          <span class="art" aria-hidden="true">
+            <svg viewBox="0 0 280 285" xmlns="http://www.w3.org/2000/svg">
+              <rect width="280" height="285" fill="#fff"/>
+              <text x="20" y="25" font-family="Georgia" font-size="14" fill="#747474">B+ Tree index lookup</text>
+              <g fill="none" stroke="#9dabb5" stroke-width="2.2"><path d="M140 80v19H74v19M140 99h68v19M74 153v22H36v21M74 175h49v21M208 153v22h-49v21M208 175h39v21"/></g>
+              <g stroke-width="1.7">
+                <rect x="91" y="47" width="98" height="33" rx="4" fill="#e9eef3" stroke="#91a5b7"/>
+                <rect x="23" y="118" width="104" height="35" rx="4" fill="#f7f3ee" stroke="#b7a69b"/>
+                <rect x="156" y="118" width="104" height="35" rx="4" fill="#eaf2ed" stroke="#9bad9d"/>
+                <rect x="10" y="196" width="73" height="34" rx="3" fill="#f7f3ee" stroke="#b7a69b"/>
+                <rect x="91" y="196" width="63" height="34" rx="3" fill="#f7f3ee" stroke="#b7a69b"/>
+                <rect x="164" y="196" width="61" height="34" rx="3" fill="#d9e8da" stroke="#6c9a79" stroke-width="2.5"/>
+                <rect x="232" y="196" width="38" height="34" rx="3" fill="#eaf2ed" stroke="#9bad9d"/>
+              </g>
+              <g fill="#42484a" font-family="Georgia" text-anchor="middle" font-size="13"><text x="140" y="68">40 | 80</text><text x="75" y="140">10 | 25</text><text x="208" y="140">55 | 70</text><text x="46" y="217">10</text><text x="122" y="217">25</text><text x="194" y="217">55</text><text x="251" y="217">80</text></g>
+              <text x="140" y="259" text-anchor="middle" font-family="monospace" font-size="12" fill="#557960">WHERE id = 55</text>
+            </svg>
+          </span><span class="post-caption"><span class="post-title">SQL Indexing</span><span class="post-subtitle muted-subtitle">Queries &amp; Performance</span></span>
+        </button>
+        <button class="post" data-post="react" type="button">
+          <span class="art" aria-hidden="true">
+            <svg viewBox="0 0 280 285" xmlns="http://www.w3.org/2000/svg">
+              <rect width="280" height="285" fill="#fff"/>
+              <rect x="20" y="26" width="240" height="211" rx="7" fill="#f6f7f7" stroke="#d2d6d8" stroke-width="1.5"/>
+              <rect x="20" y="26" width="240" height="25" rx="7" fill="#dce4e7"/>
+              <circle cx="37" cy="38" r="4" fill="#d3a49c"/><circle cx="50" cy="38" r="4" fill="#ddc38e"/><circle cx="63" cy="38" r="4" fill="#a4c2ae"/>
+              <rect x="35" y="67" width="210" height="32" rx="4" fill="#dae7ea"/>
+              <rect x="46" y="80" width="49" height="6" rx="2" fill="#88a9b0"/><rect x="169" y="80" width="28" height="6" rx="2" fill="#aac3c6"/><rect x="204" y="80" width="28" height="6" rx="2" fill="#aac3c6"/>
+              <rect x="36" y="112" width="60" height="102" rx="3" fill="#eee9e2"/>
+              <g fill="#c5b5a2"><rect x="46" y="125" width="39" height="7" rx="2"/><rect x="46" y="145" width="29" height="6" rx="2"/><rect x="46" y="163" width="37" height="6" rx="2"/><rect x="46" y="181" width="31" height="6" rx="2"/></g>
+              <g><rect x="107" y="112" width="64" height="102" rx="3" fill="#e2ebef"/><rect x="179" y="112" width="65" height="102" rx="3" fill="#e3eee5"/>
+                <rect x="117" y="122" width="43" height="44" rx="3" fill="#aec8d3"/><rect x="189" y="122" width="44" height="44" rx="3" fill="#b1d0b6"/>
+                <rect x="117" y="177" width="43" height="6" rx="2" fill="#8faab6"/><rect x="117" y="190" width="32" height="6" rx="2" fill="#b3c4ca"/><rect x="189" y="177" width="44" height="6" rx="2" fill="#8eaf98"/><rect x="189" y="190" width="30" height="6" rx="2" fill="#bacdbf"/>
+              </g>
+              <text x="140" y="260" text-anchor="middle" font-family="Georgia" font-size="14" fill="#667c85">Components · State · UI</text>
+            </svg>
+          </span><span class="post-caption"><span class="post-title">Frontend with React</span><span class="post-subtitle muted-subtitle">Components &amp; Interfaces</span></span>
+        </button>
+      </div>
+    </section>
+
+
+    <section class="section" aria-labelledby="ai-title">
+      <h2 id="ai-title" class="section-heading">Artificial Intelligence &amp; Deep Learning <span class="heading-note">(Currently Exploring)</span></h2>
+      <div class="cards">
+        <button class="post" data-post="neural" type="button">
+          <span class="art" aria-hidden="true">
+            <svg viewBox="0 0 280 285" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="285" fill="#fff"/>
+              <g stroke="#b8b8b8" stroke-width="1.7" fill="none"><path d="M45 55l97 22 92-35M45 55l97 81 92-94M45 55l97 156 92-169M45 143l97-66 92-35M45 143l97-7 92-94M45 143l97 68 92-169M45 228l97-151 92-35M45 228l97-92 92-94M45 228l97-17 92-169"/><path d="M142 77l92 68M142 136l92 9M142 211l92-66"/></g>
+              <g fill="#e8bd94" stroke="#ba9677" stroke-width="1.5"><circle cx="45" cy="55" r="13"/><circle cx="45" cy="143" r="13"/><circle cx="45" cy="228" r="13"/></g><g fill="#c4d7eb" stroke="#849ab4" stroke-width="1.5"><circle cx="142" cy="77" r="13"/><circle cx="142" cy="136" r="13"/><circle cx="142" cy="211" r="13"/></g><g fill="#cedfbc" stroke="#97ab82" stroke-width="1.5"><circle cx="234" cy="42" r="13"/><circle cx="234" cy="145" r="13"/></g>
+            </svg>
+          </span><span class="post-caption"><span class="post-title">Neural Networks</span><span class="post-subtitle muted-subtitle">The Fundamentals</span></span>
+        </button>
+        <button class="post" data-post="agents" type="button">
+          <span class="art" aria-hidden="true">
+            <svg viewBox="0 0 280 285" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="285" fill="#fff"/>
+              <rect x="72" y="89" width="135" height="111" rx="9" fill="#e2eaf0" stroke="#91a7b8" stroke-width="2"/><rect x="93" y="105" width="94" height="64" rx="7" fill="#fbfcfc"/><circle cx="119" cy="136" r="7" fill="#607c96"/><circle cx="159" cy="136" r="7" fill="#607c96"/><path d="M128 151q13 11 24 0" fill="none" stroke="#607c96" stroke-width="3" stroke-linecap="round"/>
+              <path d="M140 89V69" stroke="#91a7b8" stroke-width="3"/><circle cx="140" cy="61" r="7" fill="#e7bda1"/><rect x="102" y="179" width="75" height="8" rx="4" fill="#b3c7d4"/>
+              <rect x="12" y="27" width="82" height="36" rx="4" fill="#f5ebdd" stroke="#cab89f"/><text x="53" y="49" font-size="12" fill="#6b594c" text-anchor="middle" font-family="Georgia">Reason</text>
+              <rect x="189" y="27" width="79" height="36" rx="4" fill="#e5efdf" stroke="#a5b99d"/><text x="228" y="49" font-size="12" fill="#5c7256" text-anchor="middle" font-family="Georgia">Plan</text>
+              <rect x="14" y="223" width="87" height="36" rx="4" fill="#e1eaf2" stroke="#9baebe"/><text x="57" y="246" font-size="12" fill="#586979" text-anchor="middle" font-family="Georgia">Tools</text>
+              <rect x="189" y="223" width="80" height="36" rx="4" fill="#f3e7e7" stroke="#c9a4a4"/><text x="229" y="246" font-size="12" fill="#866767" text-anchor="middle" font-family="Georgia">Act</text>
+              <g stroke="#aaa" fill="none" stroke-width="2"><path d="M92 63l20 26M187 89l19-26M105 201l-34 22M179 200l27 23"/></g>
+            </svg>
+          </span><span class="post-caption"><span class="post-title">AI Agents</span><span class="post-subtitle muted-subtitle">Reasoning, Tools &amp; Actions</span></span>
+        </button>
+        <button class="post" data-post="deep" type="button">
+          <span class="art" aria-hidden="true">
+            <svg viewBox="0 0 280 285" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="285" fill="#fff"/><rect x="20" y="25" width="239" height="206" rx="3" fill="#f3f2f0"/>
+              <g stroke-width="1.2" fill="none"><path d="M37 174l35-49 34 24 34-62 32 38 32-59 37 41" stroke="#6086a3" stroke-width="4"/><path d="M37 187l35-14 34-31 34 30 32-53 32 17 37-46" stroke="#c49a73" stroke-width="4"/><path d="M37 203h206" stroke="#777"/></g>
+              <g font-family="Georgia" fill="#696969" font-size="12"><text x="36" y="50">Training &amp; optimization</text><text x="36" y="247">Learning patterns from data</text></g>
+              <circle cx="140" cy="87" r="4.5" fill="#6086a3"/><circle cx="172" cy="119" r="4.5" fill="#c49a73"/>
+            </svg>
+          </span><span class="post-caption"><span class="post-title">Deep Learning</span><span class="post-subtitle muted-subtitle">Experiments &amp; Notes</span></span>
+        </button>
+      </div>
+    </section>
+
+    <section id="about" class="section" aria-labelledby="about-title">
+      <h2 id="about-title" class="section-heading">About Me</h2>
+      <div class="about-copy">
+        <p>Hello! I'm <strong>Pham Duy Cuong</strong>, a full-stack developer from Vietnam. Right now, my main focus is building web applications from end to end — from frontend interfaces and backend services to databases and system architecture.</p>
+        <p>Alongside my full-stack work, I'm exploring the wider technology landscape, especially <strong>DevOps, Data Engineering, and Artificial Intelligence</strong>. I enjoy learning how these areas connect and experimenting with the tools and ideas behind them.</p>
+        <p>This is my small corner of the internet — a place to document what I'm learning, share technical notes, and write about interesting problems I encounter along the way. I'll add more projects here over time.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <h2 id="contact-title" class="section-heading">Contact</h2>
+      <p class="contact-line">Want to see what I'm working on? You can find my code and projects on GitHub.</p>
+      <div class="contact-links"><a href="https://github.com/PhamDuyCuong113" target="_blank" rel="noopener noreferrer">GitHub Profile ↗</a><a href="#blog">Back to Blog ↑</a></div>
+    </section>
+    <footer class="page-footer"><span>© <span id="year">2026</span> Pham Duy Cuong</span><span>Made with HTML &amp; CSS · Hosted on GitHub Pages</span></footer>
+  </main>
+
+  <dialog id="post-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-head"><h2 id="dialog-title"></h2><button id="dialog-close" class="close" type="button" aria-label="Close">×</button></div>
+    <div class="dialog-content"><span class="dialog-tag" id="dialog-tag"></span><p id="dialog-text"></p><a class="dialog-link" href="https://github.com/PhamDuyCuong113" target="_blank" rel="noopener noreferrer">Explore my GitHub ↗</a></div>
+  </dialog>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const articles = {
+      neural: ['Neural Networks', 'Artificial intelligence · Fundamentals', 'My notes on how neural networks represent information, learn from examples, and improve through gradient descent and backpropagation.'],
+      agents: ['AI Agents', 'Artificial intelligence · Applied systems', 'Exploring how language-model agents can reason through tasks, use software tools, access information, and take useful actions with appropriate safeguards.'],
+      deep: ['Deep Learning', 'Artificial intelligence · Experiments', 'Experiments with model architectures, training, evaluation, and visual explanations of machine learning concepts.'],
+      design: ['System Design', 'Software engineering · Architecture', 'Learning how scalable software systems are designed: APIs, databases, caching, messaging, reliability, and the trade-offs behind technical decisions.'],
+      backend: ['Backend & APIs', 'Software engineering · Development', 'Building and understanding backend services, including Java, data processing, network programming, and web APIs.'],
+      performance: ['Web Performance', 'Software engineering · Optimization', 'Notes on HTTP caching and the design choices that make web applications faster and more reliable.'],
+      database: ['Database Design', 'Software engineering · Data modeling', 'Exploring relational database design, entity relationships, normalization, constraints, and structuring data for maintainable applications.'],
+      sqlindex: ['SQL Indexing', 'Software engineering · Query optimization', 'Notes on B-tree indexes, composite indexes, selectivity, execution plans, and how databases retrieve data efficiently.'],
+      react: ['Frontend with React', 'Software engineering · Frontend', 'Building user interfaces with React, reusable components, state management, API integration, and responsive layouts.']
+    };
+    const dialog = document.getElementById('post-dialog');
+    document.querySelectorAll('[data-post]').forEach(button => button.addEventListener('click', () => {
+      const [title, tag, description] = articles[button.dataset.post];
+      document.getElementById('dialog-title').textContent = title;
+      document.getElementById('dialog-tag').textContent = tag;
+      document.getElementById('dialog-text').textContent = description;
+      if (typeof dialog.showModal === 'function') dialog.showModal();
+      else dialog.setAttribute('open', '');
+    }));
+    document.getElementById('dialog-close').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  </script>
+</body>
+</html>
